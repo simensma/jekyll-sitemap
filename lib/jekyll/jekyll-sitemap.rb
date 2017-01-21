@@ -1,6 +1,15 @@
 require "fileutils"
+require 'liquid'
+require 'uri'
 
 module Jekyll
+
+  module URIEscape
+    def uri_escape2(url)
+      return CGI.escapeHTML(url)
+    end
+  end
+
   class JekyllSitemap < Jekyll::Generator
     safe true
     priority :lowest
@@ -68,3 +77,5 @@ module Jekyll
     end
   end
 end
+
+Liquid::Template.register_filter(Jekyll::URIEscape)
